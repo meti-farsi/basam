@@ -4,13 +4,14 @@ const mongoose = require("mongoose")
 
 
 const port = process.env.PORT ;
+console.log(port);
 
-(async => {
+(async () => {
     await mongoose.connect(process.env.MONGO_URI)
-    console.log("connected");
+    console.log("connected db");
     
 })();
 
 app.listen(port, ()=>{
-    console.log("connected")
+    console.log("started backend ")
 })
