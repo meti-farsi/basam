@@ -24,9 +24,6 @@ exports.register = async (req, res) => {
 
   let { username, name, email, password, phone } = req.body;
 
-  const userExists = await userModel.findOne({
-    $or: [{ username }, { email }],
-  });
 
 const userExists = await userModel.findOne({
     $or:[{username},{email}]
