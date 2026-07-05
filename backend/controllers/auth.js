@@ -44,9 +44,6 @@ exports.register = async (req, res) => {
     expiresIn:"30 day"
   })
 
-  let test = "sdfsdf"
-  let kon = "laghet"
-
   return res.status(201).json({user , accsesToken})
 
   
