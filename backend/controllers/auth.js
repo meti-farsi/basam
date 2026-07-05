@@ -36,8 +36,8 @@ if(userExists){
     })
  }
     await userModel.create({username , name , email , password , phone })
-    res.status(422).json({
-        mass : "اوکیش میکنم "
+    res.status(201).json({
+        mass : "اوکیش شد "
     })
 }
 
