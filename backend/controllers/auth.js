@@ -1,5 +1,5 @@
 const userModel = require("../models/user")
-
+const banUserModel = require('../models/ban-phone')
 const registerValidator = require("../validators/userValidator")
 
 exports.register = async (req , res) =>{
@@ -18,27 +18,30 @@ if(validateRigester !== true){
 
 let {username , name , email , password , phone } = req.body
 
-console.log(username);
-
 
 const userExists = await userModel.findOne({
     $or:[{username},{email}]
 })
-console.log(userExists);
 
 if(userExists){
     res.status(422).json({
         mass : "user hast"
     })
-} else{
+} 
+ const isUserBan = await banUserModel.find({phone})
 
+ if(isUserBan){
+    res.status(409).json({
+        message : 'this phon number ban'
+    })
+ }
     await userModel.create({username , name , email , password , phone })
     res.status(422).json({
         mass : "اوکیش میکنم "
     })
 }
 
-}
+
 
 
 exports.login = async (req , res) =>{
