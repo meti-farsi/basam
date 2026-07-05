@@ -7,8 +7,8 @@ const port = process.env.PORT ;
 console.log(port);
 
 (async () => {
-    await mongoose.connect(process.env.MONGO_URI)
-    console.log("connected db");
+  let test =  await mongoose.connect(process.env.MONGO_URI)
+    console.log(`connected db ${test}`)
     
 })();
 
