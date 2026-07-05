@@ -5,11 +5,9 @@ const jsonwebtoken = require("jsonwebtoken");
 const registerValidator = require("../validators/userValidator");
 
 exports.register = async (req, res) => {
-  console.log(req.body);
 
   const validateRigester = registerValidator(req.body);
 
-  console.log(validateRigester);
 
   if (validateRigester !== true) {
     return res.status(422).json(validateRigester);
