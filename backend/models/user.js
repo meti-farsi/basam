@@ -12,7 +12,7 @@ const schima = new mongoose.Schema({
  email :{
     type : String,
     required : true,
-    unique : truse
+    unique : true
  },
  password :{
     type : String,
@@ -26,7 +26,7 @@ const schima = new mongoose.Schema({
     type :String ,
     default : "USER",
     required: true,
-    enum:["ADMIN" , USER]
+    enum:["ADMIN" , "USER"]
  }
 },
 {timestamps : true}

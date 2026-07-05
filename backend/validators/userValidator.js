@@ -15,4 +15,4 @@ const schema = {
 
 const check = v.compile(schema);
 
-madule.expoerts = check
+module.expoerts = check
