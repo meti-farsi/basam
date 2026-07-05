@@ -45,6 +45,7 @@ exports.register = async (req, res) => {
   })
 
   let test = "sdfsdf"
+  let kon = "laghet"
 
   return res.status(201).json({user , accsesToken})
 
