@@ -34,7 +34,7 @@ exports.register = async (req, res) => {
     });
   }
 
-  const userCount = userModel.count();
+  const userCount = await userModel.count();
   const hashPassword = bcrypt.hash(password, 10);
 
   const user = await userModel.create({ username, name, email, password:hashPassword, phone , role:userCount > 0 ? "USER" : "ADMIN"});
