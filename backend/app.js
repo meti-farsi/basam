@@ -10,6 +10,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : false}))
 let b = null
+let d = null
 app.use("/auth",authRouter)
 
 module.exports = app;
