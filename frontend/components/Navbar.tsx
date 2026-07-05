@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const navList =[
   {id : 1 , ttile :"meti"}
