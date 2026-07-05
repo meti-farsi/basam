@@ -1,15 +1,19 @@
 import Image from "next/image";
-// import Footer from "../components/Footer.jsx"
+import Footer from "../components/Footer"
 import Navbar from "../components/Navbar";
 
+import NotFoundHero from "@/components/NotFoundHero";
+import Container from "@/components/Container";
 export default function Home() {
   return (
     <>
-      <Navbar />
-
+    <Navbar />
       <main>
+      <Container>
+        <NotFoundHero />
+        <Footer />
+      </Container>
       </main>
-
     </>
   );
 }
