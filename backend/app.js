@@ -11,6 +11,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : false}))
 let b = null
 let d = null
+let c = null
 app.use("/auth",authRouter)
 
 module.exports = app;
