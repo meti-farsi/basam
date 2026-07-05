@@ -8,11 +8,10 @@ const schema = {
   email: { type: "email", min: 3, max: 255 },
   phone: { type: "string", min: 3, max: 255 },
   password: { type: "string", min: 3, max: 255 },
-  confirmPassword: { type: "equal",field :"password" },
-  role: { type: "string", min: 3, max: 255 },
-  $$srict:"true"
+  confirmPassword: { type: "equal", field: "password" },
+  $$strict: true,
 };
 
 const check = v.compile(schema);
 
-module.expoerts = check
+module.exports = check;

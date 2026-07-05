@@ -3,21 +3,36 @@ const userModel = require("../models/user")
 const registerValidator = require("../validators/userValidator")
 
 exports.register = async (req , res) =>{
-const validateRigester = registerValidator(req.body)
 
-if(!validateRigester){
+    console.log(req.body);
+    
+    const validateRigester = registerValidator(req.body)
+
+
+    console.log(validateRigester);
+    
+
+if(validateRigester !== true){
     return res.status(422).json(validateRigester)
 }
 
-const {usename , name , email , password , phone } = req.body
+let {username , name , email , password , phone } = req.body
+
+console.log(username);
+
 
 const userExists = await userModel.findOne({
-    $or:[{usename},{email},{phone}]
+    $or:[{username},{email}]
 })
+console.log(userExists);
 
 if(userExists){
     res.status(422).json({
         mass : "user hast"
+    })
+} else{
+    res.status(422).json({
+        mass : "اوکیش میکنم "
     })
 }
 

@@ -7,11 +7,18 @@ const port = process.env.PORT ;
 console.log(port);
 
 (async () => {
-  let test =  await mongoose.connect(process.env.MONGO_URI)
-    console.log(`connected db ${test}`)
-    
-})();
+    try {
+      console.log("Connecting...");
+  
+      await mongoose.connect(process.env.MONGO_URI);
+  
+      console.log("Connected");
+  
+      app.listen(port, () => {
+        console.log(`Server started on ${port}`);
+      });
+    } catch (err) {
+      console.error("Mongo Error:", err);
+    }
+  })();
 
-app.listen(port, ()=>{
-    console.log("started backend ")
-})

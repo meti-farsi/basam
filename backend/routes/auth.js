@@ -3,7 +3,7 @@ const router = express.Router();
 
 const auth = require("../controllers/auth")
 
-router.get('/rigester', auth.register )
+router.post('/rigester', auth.register )
 router.get('/login', auth.login )
 router.get('/getme', auth.getMe )
 
