@@ -9,7 +9,7 @@ app.use('/courses/covers', express.static(path.join(__dirname, "public",'courses
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : false}))
-
+let b = null
 app.use("/auth",authRouter)
 
 module.exports = app;
