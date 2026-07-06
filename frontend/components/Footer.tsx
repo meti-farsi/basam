@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Button from "./Button";
 const courseLinks = [
   "Featured Courses",
   "Featured Categories",
@@ -48,12 +48,11 @@ export default function Footer() {
                 className="flex-1 rounded-full border border-gray-300 px-5 py-3 outline-none focus:border-lime-400"
               />
 
-              <button
+              <Button
                 type="submit"
-                className="rounded-full bg-lime-300 px-8 font-semibold transition hover:bg-lime-400"
               >
                 Search
-              </button>
+              </Button>
             </form>
 
             <p className="mt-6 max-w-md text-xs text-gray-400">
