@@ -71,7 +71,9 @@ exports.login = async (req, res) => {
     });
   }
 
-  const accessToken = jsonwebtoken.sign({id : user._id} , process.env.JWT_SECRET);
+  const accessToken = jsonwebtoken.sign({id : user._id} , process.env.JWT_SECRET,{
+    expiresIn : "30 day"
+  });
  return res.status(200).json({accessToken})
 };
 
