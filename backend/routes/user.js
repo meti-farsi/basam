@@ -6,7 +6,8 @@ const isAminMiddlware = require("../middlewares/isAdmin")
 
 
 router.route("/ban/:id").post(authMiddlware,isAminMiddlware,userController.banUser)
-router.route("/").get(userController.getAll)
-
+router.route("/").get(authMiddlware,isAminMiddlware,userController.getAll)
+router.route("/:id").delete(authMiddlware,isAminMiddlware,userController.removeUser)
+router.route("/role").put(authMiddlware,isAminMiddlware,userController.updateRole)
 
 module.exports = router
