@@ -1,3 +1,4 @@
+// app/register/page.tsx
 "use client";
 
 import { useState } from "react";
@@ -7,28 +8,52 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
-  const [identifier, setIdentifier] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [form, setForm] = useState({
+    name: "",
+    username: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const handleChange =
+    (field: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setForm((prev) => ({ ...prev, [field]: e.target.value }));
+    };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
+
+    if (form.password !== form.confirmPassword) {
+      setError("رمز عبور و تکرار آن یکسان نیستند.");
+      return;
+    }
+
     setLoading(true);
     try {
       const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
-        { identifier, password }
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+        {
+          name: form.name,
+          username: form.username,
+          email: form.email,
+          phone: form.phone,
+          password: form.password,
+        }
       );
       localStorage.setItem("token", data.token);
       axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
       router.push("/dashboard");
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        setError(err.response?.data?.message || "ورود ناموفق بود، دوباره تلاش کنید.");
+        setError(err.response?.data?.message || "ثبت‌نام ناموفق بود، دوباره تلاش کنید.");
       } else {
         setError("خطای غیرمنتظره‌ای رخ داد.");
       }
@@ -58,16 +83,14 @@ export default function LoginPage() {
           </div>
 
           <div className="relative z-10 max-w-xs mt-4">
-            <h1 className="text-xl font-semibold mb-2">Sign in with ease</h1>
+            <h1 className="text-xl font-semibold mb-2">Join and start learning</h1>
             <p className="text-blue-100 text-sm leading-relaxed">
-              Experience a seamless and efficient sign-in process that grants
-              you instant access to a world of knowledge.
+              Create your account and get instant access to a world of
+              knowledge, courses, and a community of learners.
             </p>
           </div>
 
-          {/* card stack area */}
           <div className="relative z-10 flex-1 mt-10">
-            {/* back card */}
             <div className="absolute left-0 top-10 w-40 h-56 rounded-2xl bg-white/90 shadow-xl p-3">
               <div className="h-24 rounded-lg bg-gray-200 mb-3" />
               <span className="absolute top-2 left-2 text-[10px] bg-black/70 text-white px-2 py-0.5 rounded-full">
@@ -78,10 +101,8 @@ export default function LoginPage() {
               <p className="text-blue-600 text-xs font-bold mt-1">$25 <span className="text-gray-400 font-normal">lifetime</span></p>
             </div>
 
-            {/* lime ring */}
             <div className="absolute left-6 -top-2 w-10 h-10 rounded-full border-[6px] border-lime-400" />
 
-            {/* front card */}
             <div className="absolute left-24 top-0 w-52 rounded-2xl bg-white shadow-2xl p-3 z-10">
               <div className="h-24 rounded-lg bg-black mb-3 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/40 to-transparent" />
@@ -94,7 +115,6 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* lime triangle */}
             <div
               className="absolute left-2 top-44 w-0 h-0"
               style={{
@@ -104,7 +124,6 @@ export default function LoginPage() {
               }}
             />
 
-            {/* happy students badge */}
             <div className="absolute left-32 top-48 w-56 rounded-2xl bg-lime-400 text-blue-900 p-3 shadow-xl">
               <p className="text-xs font-semibold">Happy Students</p>
               <p className="text-[10px]">4.5 ★ 2.4k</p>
@@ -115,22 +134,49 @@ export default function LoginPage() {
         {/* Right form panel */}
         <div className="flex items-center justify-center p-8 sm:p-14">
           <div className="w-full max-w-sm">
-            <p className="text-blue-600 text-sm font-medium mb-1">Sign In</p>
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Welcome Back</h2>
+            <p className="text-blue-600 text-sm font-medium mb-1">Sign Up</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Create Account</h2>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <Input
+                label="Full Name"
+                placeholder="Ali Rezaei"
+                value={form.name}
+                onChange={handleChange("name")}
+              />
+              <Input
+                label="Username"
+                placeholder="ali_rezaei"
+                value={form.username}
+                onChange={handleChange("username")}
+              />
               <Input
                 label="Email"
+                type="email"
                 placeholder="designer@example.com"
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
+                value={form.email}
+                onChange={handleChange("email")}
+              />
+              <Input
+                label="Phone"
+                type="tel"
+                placeholder="09121234567"
+                value={form.phone}
+                onChange={handleChange("phone")}
               />
               <Input
                 label="Password"
                 type="password"
                 placeholder="********"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={form.password}
+                onChange={handleChange("password")}
+              />
+              <Input
+                label="Confirm Password"
+                type="password"
+                placeholder="********"
+                value={form.confirmPassword}
+                onChange={handleChange("confirmPassword")}
               />
 
               {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -141,38 +187,15 @@ export default function LoginPage() {
                   disabled={loading}
                   className="bg-lime-400 text-blue-900 hover:bg-lime-300 rounded-full px-6"
                 >
-                  {loading ? "..." : "Sign In"}
+                  {loading ? "..." : "Sign Up"}
                 </Button>
               </div>
             </form>
 
-            <div className="flex items-center gap-3 my-8">
-              <div className="flex-1 h-px bg-gray-200" />
-              <span className="text-xs text-gray-400">or</span>
-              <div className="flex-1 h-px bg-gray-200" />
-            </div>
-
-            <div className="flex justify-center gap-4">
-              <button
-                type="button"
-                className="w-11 h-11 rounded-full border flex items-center justify-center hover:bg-gray-50 font-semibold"
-                aria-label="Sign in with Facebook"
-              >
-                f
-              </button>
-              <button
-                type="button"
-                className="w-11 h-11 rounded-full border flex items-center justify-center hover:bg-gray-50 font-semibold"
-                aria-label="Sign in with Google"
-              >
-                G
-              </button>
-            </div>
-
             <p className="text-center text-sm text-gray-500 mt-8">
-              New user?{" "}
-              <Link href="/register" className="text-blue-600 font-medium">
-                Create an account
+              Already have an account?{" "}
+              <Link href="/login" className="text-blue-600 font-medium">
+                Sign In
               </Link>
             </p>
           </div>

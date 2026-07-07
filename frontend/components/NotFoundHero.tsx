@@ -1,29 +1,5 @@
 export default function NotFoundHero() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#2F5BFF]">
-      {/* Grid */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `
-            repeating-linear-gradient(
-              to right,
-              rgba(255,255,255,.12) 0,
-              rgba(255,255,255,.12) 1px,
-              transparent 1px,
-              transparent calc(100% / 6)
-            ),
-            repeating-linear-gradient(
-              to bottom,
-              rgba(255,255,255,.12) 0,
-              rgba(255,255,255,.12) 1px,
-              transparent 1px,
-              transparent calc(100% / 6)
-            )
-          `,
-        }}
-      />
-
     <section className="relative z-10 flex min-h-screen flex-col items-center justify-center">
       <h1
         className="bg-clip-text text-transparent font-black leading-none text-[clamp(120px,30vw,480px)]"
@@ -53,6 +29,5 @@ export default function NotFoundHero() {
         Try to use a correct url or go back to homepage to start again.
       </p>
     </section>
-    </main>
   );
 }
