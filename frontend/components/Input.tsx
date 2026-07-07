@@ -11,7 +11,7 @@ export default function Input({
 }: Props) {
   return (
     <div className="space-y-2">
-      <label className="text-sm font-medium">
+      <label className="border border-gray-300 text-gray-900 placeholder:text-gray-400">
         {label}
       </label>
 
@@ -19,7 +19,7 @@ export default function Input({
         {...props}
         className={`
           w-full rounded-xl
-          border border-gray-300
+          border border-black-300
           px-4 py-3
           outline-none
           focus:border-lime-400

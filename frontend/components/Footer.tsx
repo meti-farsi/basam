@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Button from "./Button";
+import Container from "./Container";
+
 const courseLinks = [
   "Featured Courses",
   "Featured Categories",
@@ -26,11 +28,9 @@ const companyLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-white">
-      <div className="mx-auto max-w-7xl px-8 py-16">
-
+    <footer className="w-full bg-white">
+      <Container className="py-16">
         <div className="grid gap-14 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-
           <div>
             <Link href="/" className="text-3xl font-bold">
               ByteSpace
@@ -48,9 +48,7 @@ export default function Footer() {
                 className="flex-1 rounded-full border border-gray-300 px-5 py-3 outline-none focus:border-lime-400"
               />
 
-              <Button
-                type="submit"
-              >
+              <Button type="submit">
                 Search
               </Button>
             </form>
@@ -60,6 +58,7 @@ export default function Footer() {
               receive updates from our company.
             </p>
           </div>
+
           <div className="space-y-4">
             {courseLinks.map((item) => (
               <Link
@@ -100,7 +99,6 @@ export default function Footer() {
         <div className="my-14 h-px bg-gray-200" />
 
         <div className="flex flex-col items-center justify-between gap-4 text-sm text-gray-500 md:flex-row">
-
           <p>© 2023 Basam Nazemi. All rights reserved.</p>
 
           <div className="flex gap-8">
@@ -109,7 +107,7 @@ export default function Footer() {
             <Link href="#">Cookies Settings</Link>
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }
