@@ -1,15 +1,12 @@
 const express = require("express");
 const userController = require('./../controllers/user')
 const router = express.Router()
+const authMiddlware = require("../middlewares/auth")
+const isAminMiddlware = require("../middlewares/isAdmin")
 
-<<<<<<< HEAD
-router.route("/ban/:id")
-.post(userController.banUser)
-=======
 
-router.route("/ban/:id").post(userController.banUser)
+router.route("/ban/:id").post(authMiddlware,isAminMiddlware,userController.banUser)
 router.route("/").get(userController.getAll)
->>>>>>> refs/remotes/origin/main
 
 
 module.exports = router
