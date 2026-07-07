@@ -28,9 +28,9 @@ export default function LoginPage() {
       router.push("/dashboard");
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        setError(err.response?.data?.message || "ورود ناموفق بود، دوباره تلاش کنید.");
+        setError(err.response?.data?.message || "UnSuccessfull Login");
       } else {
-        setError("خطای غیرمنتظره‌ای رخ داد.");
+        setError("An Error Occured");
       }
     } finally {
       setLoading(false);
