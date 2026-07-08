@@ -3,6 +3,7 @@ const path = require("path");
 const cors = require("cors")
 const authRouter = require("./routes/auth");
 const users = require('./routes/user')
+const categoryRoter = require('./routes/category')
 const bodyParser = require("body-parser");
 const app = express();
 
@@ -12,5 +13,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : false}))
 app.use("/auth",authRouter)
 app.use("/users",users)
+app.use("/category",categoryRoter)
 
 module.exports = app;
