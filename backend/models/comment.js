@@ -17,15 +17,15 @@ const schema = mongoose.Schema(
       ref: "User",
     },
     isAccept: {
-      type: number,
+      type: Number,
       required: true,
     },
     score: {
-      type: number,
+      type: Number,
       required: true,
     },
     isAnswer: {
-      type: number,
+      type: Number,
       required: true,
     },
     mainCommentID: {

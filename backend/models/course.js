@@ -3,32 +3,32 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema(
   {
     name: {
-      type: string,
+      type: String,
       required: true,
     },
     description: {
-      type: string,
+      type: String,
       required: true,
     },
     cover: {
-      type: string,
+      type: String,
       required: true,
     },
     href: {
-      type: string,
+      type: String,
       required: true,
     },
     status: {
-      type: string,
+      type: String,
       required: true,
     },
     price: {
-      type: string,
+      type: String,
       required: true,
     },
     support: {
       required: true,
-      type: string,
+      type: String,
     },
     catgoryID: {
       required: true,
@@ -41,7 +41,7 @@ const schema = mongoose.Schema(
     },
     discount: {
       required: true,
-      type: number,
+      type: Number,
     },
   },
   { Timestamps: true }

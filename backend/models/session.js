@@ -3,28 +3,28 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema(
   {
     title: {
-      type: string,
+      type: String,
       required: true,
     },
     time: {
-      type: string,
+      type: String,
       required: true,
     },
     free: {
-      type: number,
+      type: Number,
       required: true,
     },
     video: {
-      type: string,
+      type: String,
       required: true,
     },
-    courses: {
+    course: {
       required: true,
       type: mongoose.Types.ObjectId,
-      ref: "course",
+      ref: "Course",
     },
   },
-  { Timestamps: true }
+  { timestamps: true }
 );
 
 const model = mongoose.model("Session", schema);
