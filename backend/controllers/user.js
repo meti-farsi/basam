@@ -95,7 +95,7 @@ exports.updateUser = async (req, res) => {
       }
   )
   .select("-password")
-  .lean();
+  .lean();  
 
   return res.json(user)
 
