@@ -16,6 +16,6 @@ app.use(bodyParser.urlencoded({extended : false}))
 app.use("/auth",authRouter)
 app.use("/users",users)
 app.use("/category",categoryRoter)
-app.use("/corses",courseRouter)
+app.use("/courses",courseRouter)
 
 module.exports = app;

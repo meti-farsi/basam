@@ -17,4 +17,12 @@ router
     courseController.create
   );
 
+  router
+  .route("/")
+  .get(
+    authMiddlware
+    ,isAminMiddlware,
+    courseController.getAllSession
+  );
+
 module.exports = router;

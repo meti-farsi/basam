@@ -34,3 +34,15 @@ exports.create = async (req, res) => {
   })
 
 };
+exports.getAllSession = async (req, res) => {
+
+  const mainCourse = await corsesModel.find().populate("catgoryID","title").populate("creator","name")
+
+  return res.status(201).json({
+    mainCourse
+  })
+
+};
+
+
+
