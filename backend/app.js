@@ -5,6 +5,7 @@ const authRouter = require("./routes/auth");
 const users = require('./routes/user')
 const categoryRoter = require('./routes/category')
 const courseRouter = require('./routes/corses')
+const commentRouter = require('./routes/comment')
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -17,5 +18,6 @@ app.use("/auth",authRouter)
 app.use("/users",users)
 app.use("/category",categoryRoter)
 app.use("/courses",courseRouter)
+app.use("/comment",commentRouter)
 
 module.exports = app;

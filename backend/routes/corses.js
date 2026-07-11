@@ -10,19 +10,23 @@ router
   .route("/")
   .post(
     multer({ storage: upload, limits: { fileSize: 1000000000 } }).single(
-      "cover",
+      "cover"
     ),
-    authMiddlware
-    ,isAminMiddlware,
+    authMiddlware,
+    isAminMiddlware,
     courseController.create
   );
 
-  router
+router
   .route("/")
-  .get(
-    authMiddlware
-    ,isAminMiddlware,
-    courseController.getAllSession
-  );
+  .get(authMiddlware, isAminMiddlware, courseController.getAllSession);
+
+router
+  .route("/sessions/:id")
+  .delete(authMiddlware, isAminMiddlware, courseController.removeSession);
+
+router
+  .route("/:href/:sessionID")
+  .get(authMiddlware, isAminMiddlware, courseController.getSessionInfo);
 
 module.exports = router;

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema(
   {
     body: {
-      type: string,
+      type: String,
       required: true,
     },
     course: {
