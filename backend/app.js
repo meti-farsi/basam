@@ -18,6 +18,6 @@ app.use("/auth",authRouter)
 app.use("/users",users)
 app.use("/category",categoryRoter)
 app.use("/courses",courseRouter)
-app.use("/comment",commentRouter)
+app.use("/comments",commentRouter)
 
 module.exports = app;

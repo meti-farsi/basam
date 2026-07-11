@@ -23,9 +23,8 @@ exports.create = async (req , res) =>{
         score,
         creator,
         isAccept:0,
-        courseID,
-        isAnswer : 0,
-        mainCommentID : ""
+       course: courseID,
+        isAnswer : 0
 
     })
 

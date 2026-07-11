@@ -29,7 +29,7 @@ const schema = mongoose.Schema(
       required: true,
     },
     mainCommentID: {
-      required: true,
+      // required: true,
       type: mongoose.Types.ObjectId,
       ref: "Comment",
     },
