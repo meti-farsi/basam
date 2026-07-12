@@ -136,7 +136,6 @@ exports.getOneCourse = async (req, res) => {
 
 return res.json({course, sessions ,comments ,countuserregistered, userRegistered});
 };
-<<<<<<< HEAD
 exports.relatedCoureses = async (req, res) => {
   console.log(req.params);
 
@@ -152,7 +151,6 @@ exports.relatedCoureses = async (req, res) => {
   
 return res.json(relatedcourses);
 };
-=======
 
 exports.removeCourse = async(req,res)=>{
  const validObjectId = isValidObjectId(req.params.id)
@@ -175,4 +173,3 @@ exports.removeCourse = async(req,res)=>{
   mess : "user deleted"
  })
 }
->>>>>>> refs/remotes/origin/main

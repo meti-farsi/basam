@@ -19,7 +19,6 @@ router
 
 router.route("/:href").get(authMiddlware, courseController.getOneCourse);
 
-<<<<<<< HEAD
   router
   .route("related/:href")
   .get( courseController.relatedCoureses);
@@ -27,9 +26,7 @@ router.route("/:href").get(authMiddlware, courseController.getOneCourse);
   router
   .route("/category/:href")
   .get (courseController.getByCategory);
-=======
 router.route("/category/:href").get(courseController.getByCategory);
->>>>>>> refs/remotes/origin/main
 
 router
   .route("/sessions/:id")
