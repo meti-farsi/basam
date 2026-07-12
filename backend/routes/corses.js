@@ -29,4 +29,8 @@ router
   .route("/:href/:sessionID")
   .get(authMiddlware, isAminMiddlware, courseController.getSessionInfo);
 
+router
+  .route("/:id/register")
+  .post(authMiddlware, courseController.register);
+
 module.exports = router;

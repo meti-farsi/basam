@@ -1,4 +1,5 @@
 const corsesModel = require("../models/course");
+const CourseUserModel = require("../models/course-user");
 const sessionModel = require("../models/session");
 
 exports.create = async (req, res) => {
@@ -76,4 +77,25 @@ if(!course){
 
 };
 
+exports.register = async (req, res) => {
+
+  
+ let isUserRegisteralredy =  await CourseUserModel.findOne({
+    user:req.user._id ,
+    course : req.params.id
+  }).lean()
+
+if (isUserRegisteralredy){
+ return res.json({test:"قبلا ثبت نام شده "})
+
+}  
+
+let UserRegister = CourseUserModel.create({
+  user:req.user._id ,
+  course : req.params.id,
+ price : req.body.price
+})
+
+res.json({mess : " ثبت نام شد "})
+};
 
