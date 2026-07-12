@@ -21,6 +21,10 @@ router
   .route("/")
   .get(authMiddlware, isAminMiddlware, courseController.getAllSession);
 
+  router
+  .route("/category/:href")
+  .get (courseController.getByCategory);
+
 router
   .route("/sessions/:id")
   .delete(authMiddlware, isAminMiddlware, courseController.removeSession);

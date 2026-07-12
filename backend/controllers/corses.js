@@ -1,6 +1,7 @@
 const corsesModel = require("../models/course");
 const CourseUserModel = require("../models/course-user");
 const sessionModel = require("../models/session");
+const Category = require("../models/category");
 
 exports.create = async (req, res) => {
   const {
@@ -97,5 +98,16 @@ let UserRegister = CourseUserModel.create({
 })
 
 res.json({mess : " ثبت نام شد "})
+};
+exports.getByCategory = async (req, res) => {
+
+  // let categoryIDs = await Category.find({href : req.params.href})
+
+
+let courses = await corsesModel.find({
+  href:req.params.href
+})
+
+res.json({courses})
 };
 
