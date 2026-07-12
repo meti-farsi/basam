@@ -136,3 +136,18 @@ exports.getOneCourse = async (req, res) => {
 let u = {}
 return res.json({course, sessions ,comments ,countuserregistered, userRegistered});
 };
+exports.relatedCoureses = async (req, res) => {
+  console.log(req.params);
+
+  let course = await corsesModel
+    .findOne({ href: req.params.href })
+
+  if(!course){
+    return res.json({mess:"این دوره رو نداریم"})
+
+  }
+  let relatedcourses = await CourseUserModel.find({ course: course._id }).lean();
+  
+  
+return res.json(relatedcourses);
+};

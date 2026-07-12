@@ -22,6 +22,10 @@ router
   .get(authMiddlware, courseController.getOneCourse);
 
   router
+  .route("related/:href")
+  .get( courseController.relatedCoureses);
+
+  router
   .route("/category/:href")
   .get (courseController.getByCategory);
 
