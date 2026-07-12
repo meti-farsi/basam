@@ -101,13 +101,16 @@ res.json({mess : " ثبت نام شد "})
 };
 exports.getByCategory = async (req, res) => {
 
-  // let categoryIDs = await Category.find({href : req.params.href})
+  let categoryIDs = await Category.findOne({href : req.params.href})
 
+if(!categoryIDs){
+  return res.json([])
 
+}
 let courses = await corsesModel.find({
-  href:req.params.href
+  catgoryID:categoryIDs._id
 })
 
-res.json({courses})
+res.json({categoryIDs,courses})
 };
 
