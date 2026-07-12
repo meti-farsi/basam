@@ -10,17 +10,16 @@ router
   .route("/")
   .post(
     multer({ storage: upload, limits: { fileSize: 1000000000 } }).single(
-      "cover"
+      "cover",
     ),
     authMiddlware,
     isAminMiddlware,
-    courseController.create
+    courseController.create,
   );
 
-router
-  .route("/:href")
-  .get(authMiddlware, courseController.getOneCourse);
+router.route("/:href").get(authMiddlware, courseController.getOneCourse);
 
+<<<<<<< HEAD
   router
   .route("related/:href")
   .get( courseController.relatedCoureses);
@@ -28,6 +27,9 @@ router
   router
   .route("/category/:href")
   .get (courseController.getByCategory);
+=======
+router.route("/category/:href").get(courseController.getByCategory);
+>>>>>>> refs/remotes/origin/main
 
 router
   .route("/sessions/:id")
@@ -37,8 +39,8 @@ router
   .route("/:href/:sessionID")
   .get(authMiddlware, isAminMiddlware, courseController.getSessionInfo);
 
-router
-  .route("/:id/register")
-  .post(authMiddlware, courseController.register);
+router.route("/:id/register").post(authMiddlware, courseController.register);
+
+router.route("/:id").delete(courseController.removeCourse);
 
 module.exports = router;
