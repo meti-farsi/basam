@@ -18,8 +18,8 @@ router
   );
 
 router
-  .route("/")
-  .get(authMiddlware, isAminMiddlware, courseController.getAllSession);
+  .route("/:href")
+  .get(authMiddlware, courseController.getOneCourse);
 
   router
   .route("/category/:href")
