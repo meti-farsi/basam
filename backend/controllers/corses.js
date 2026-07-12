@@ -3,6 +3,8 @@ const CourseUserModel = require("../models/course-user");
 const sessionModel = require("../models/session");
 const commentModel = require("../models/comment");
 const Category = require("../models/category");
+const {isValidObjectId} = require("mongoose");
+const { json } = require("body-parser");
 
 exports.create = async (req, res) => {
   const {
@@ -131,8 +133,28 @@ exports.getOneCourse = async (req, res) => {
   
   let countuserregistered = await CourseUserModel.findOne({ course: course._id }).countDocuments();
   let userRegistered = !!(await CourseUserModel.findOne({user:req.user._id, course: course._id }));
-  console.log(req.user._id);
-  
-let u = {}
+
 return res.json({course, sessions ,comments ,countuserregistered, userRegistered});
 };
+
+exports.removeCourse = async(req,res)=>{
+ const validObjectId = isValidObjectId(req.params.id)
+
+ if(!validObjectId) {
+  return res.status(409).json({
+    mess : "user not valid"
+  })
+ }
+
+ const deletUser =await corsesModel.findByIdAndDelete({_id :req.params.id})
+
+ if(!deletUser){
+  return res.status(404).json({
+    mess : 'user not found'
+  })
+ }
+
+ res.status(202).json({
+  mess : "user deleted"
+ })
+}
