@@ -6,6 +6,12 @@ const isAminMiddlware = require("../middlewares/isAdmin")
 
 router.route("/")
 .post(authMiddlware, commentController.create)
+router.route("/:id")
+.delete(authMiddlware, commentController.remove)
+router.route("/:id/accept")
+.put(authMiddlware,isAminMiddlware, commentController.accept)
+router.route("/:id/reject")
+.put(authMiddlware,isAminMiddlware, commentController.reject)
 
 
 module.exports = router
