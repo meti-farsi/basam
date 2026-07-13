@@ -146,7 +146,7 @@ exports.removeCourse = async(req,res)=>{
   })
  }
 
- const deletUser =await corsesModel.findByIdAndDelete({_id :req.params.id})
+ const deletUser = await corsesModel.findByIdAndDelete({_id :req.params.id})
 
  if(!deletUser){
   return res.status(404).json({
