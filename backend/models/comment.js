@@ -22,14 +22,13 @@ const schema = mongoose.Schema(
     },
     score: {
       type: Number,
-      required: true,
+      default : 5
     },
     isAnswer: {
       type: Number,
       required: true,
     },
     mainCommentID: {
-      // required: true,
       type: mongoose.Types.ObjectId,
       ref: "Comment",
     },

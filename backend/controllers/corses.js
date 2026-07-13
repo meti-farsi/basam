@@ -115,8 +115,6 @@ exports.getByCategory = async (req, res) => {
   res.json({ categoryIDs, courses });
 };
 exports.getOneCourse = async (req, res) => {
-  console.log(req.params);
-
   let course = await corsesModel
     .findOne({ href: req.params.href })
     .populate("catgoryID")
@@ -132,7 +130,6 @@ exports.getOneCourse = async (req, res) => {
   
   let countuserregistered = await CourseUserModel.findOne({ course: course._id }).countDocuments();
   let userRegistered = !!(await CourseUserModel.findOne({user:req.user._id, course: course._id }));
-  console.log(req.user._id);
   
 return res.json({course, sessions ,comments ,countuserregistered, userRegistered});
 };

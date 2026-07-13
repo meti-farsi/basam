@@ -17,7 +17,7 @@ router
     courseController.create,
   );
 
-router.route("/:href").get(authMiddlware, courseController.getOneCourse);
+router.route("/:href").get(courseController.getOneCourse);
 
   router
   .route("/related/:href")
