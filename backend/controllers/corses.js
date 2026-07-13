@@ -3,7 +3,7 @@ const CourseUserModel = require("../models/course-user");
 const sessionModel = require("../models/session");
 const commentModel = require("../models/comment");
 const Category = require("../models/category");
-const isValidObjectId = require("mongoose")
+const isValidObjectId = require("mongoose");
 
 exports.create = async (req, res) => {
   const {
@@ -118,55 +118,79 @@ exports.getOneCourse = async (req, res) => {
   let course = await corsesModel
     .findOne({ href: req.params.href })
     .populate("catgoryID")
-    .populate("creator","-password")
+    .populate("creator", "-password")
     .lean();
 
-  if(!course){
-    return res.json({mess:"این دوره رو نداریم"})
-
+  if (!course) {
+    return res.json({ mess: "این دوره رو نداریم" });
   }
   let sessions = await sessionModel.find({ course: course._id }).lean();
-  let comments = await commentModel.find({ course: course._id }).populate("creator","-password").lean();
+  let comments = await commentModel
+    .find({ course: course._id })
+    .populate("creator", "-password")
+    .populate("course")
+    .lean();
   
-  let countuserregistered = await CourseUserModel.findOne({ course: course._id }).countDocuments();
-  let userRegistered = !!(await CourseUserModel.findOne({user:req.user._id, course: course._id }));
-  
-return res.json({course, sessions ,comments ,countuserregistered, userRegistered});
+  let countuserregistered = await CourseUserModel.findOne({
+    course: course._id,
+  }).countDocuments();
+  let userRegistered = !!(await CourseUserModel.findOne({
+    user: req.user._id,
+    course: course._id,
+  }));
+
+  let allComments = [];
+
+  comments.forEach(comment => {
+   comments.forEach(answerComment =>{
+    if(String(comment._id )=== String(answerComment.mainCommentID)){
+      
+      allComments.push({
+        ...comment,
+        course : comment.course.name,
+        creator : comment.creator.name,
+        answerComment
+      })
+    }
+   })
+    
+  });
+
+  return res.json({
+    course,
+    sessions,
+    comments:allComments,
+    countuserregistered,
+    userRegistered,
+  });
 };
 exports.relatedCoureses = async (req, res) => {
   console.log(req.params);
 
-  let course = await corsesModel
-    .findOne({ href: req.params.href })
+  let course = await corsesModel.findOne({ href: req.params.href });
 
-  if(!course){
-    return res.json({mess:"این دوره رو نداریم"})
+  if (!course) {
+    return res.json({ mess: "این دوره رو نداریم" });
 
- const deletUser = await corsesModel.findByIdAndDelete({_id :req.params.id})
+    const deletUser = await corsesModel.findByIdAndDelete({
+      _id: req.params.id,
+    });
 
-  let course = await corsesModel
-    .findByIdAndDelete(req.params.id)
+    let course = await corsesModel.findByIdAndDelete(req.params.id);
 
-  if(!course){
-    return res.json({mess:"این دوره رو نداریم"})
+    if (!course) {
+      return res.json({ mess: "این دوره رو نداریم" });
+    }
 
-  }  
-  
-return res.json(course);
-}
-}
+    return res.json(course);
+  }
+};
 exports.removeCourse = async (req, res) => {
+  let course = await corsesModel.findByIdAndDelete(req.params.id);
 
+  if (!course) {
+    return res.json({ mess: "این دوره رو نداریم" });
+  }
 
-
-  let course = await corsesModel
-    .findByIdAndDelete(req.params.id)
-
-  if(!course){
-    return res.json({mess:"این دوره رو نداریم"})
-
-  }  
-  
-return res.json(course);
-
-}
+  return res.json(course);
+};
