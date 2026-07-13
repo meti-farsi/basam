@@ -158,3 +158,18 @@ exports.relatedCoureses = async (req, res) => {
 return res.json(course);
 }
 }
+exports.removeCourse = async (req, res) => {
+
+
+
+  let course = await corsesModel
+    .findByIdAndDelete(req.params.id)
+
+  if(!course){
+    return res.json({mess:"این دوره رو نداریم"})
+
+  }  
+  
+return res.json(course);
+
+}
