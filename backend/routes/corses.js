@@ -20,7 +20,7 @@ router
 router.route("/:href").get(authMiddlware, courseController.getOneCourse);
 
   router
-  .route("related/:href")
+  .route("/related/:href")
   .get( courseController.relatedCoureses);
 
   router
