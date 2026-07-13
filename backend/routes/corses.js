@@ -19,6 +19,13 @@ router
 
 router.route("/:href").get(authMiddlware, courseController.getOneCourse);
 
+  router
+  .route("/related/:href")
+  .get( courseController.relatedCoureses);
+
+  router
+  .route("/category/:href")
+  .get (courseController.getByCategory);
 router.route("/category/:href").get(courseController.getByCategory);
 
 router
