@@ -145,14 +145,7 @@ exports.relatedCoureses = async (req, res) => {
   if(!course){
     return res.json({mess:"این دوره رو نداریم"})
 
-  }
-  let relatedcourses = await corsesModel.find({ catgoryID: course.catgoryID }).lean();
-  
-  
-return res.json(relatedcourses);
-};
-exports.removeCourse = async (req, res) => {
-  console.log(req.params);
+ const deletUser = await corsesModel.findByIdAndDelete({_id :req.params.id})
 
   let course = await corsesModel
     .findByIdAndDelete(req.params.id)
@@ -163,4 +156,5 @@ exports.removeCourse = async (req, res) => {
   }  
   
 return res.json(course);
-};
+}
+}
