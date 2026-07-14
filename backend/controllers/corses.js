@@ -166,16 +166,7 @@ exports.getOneCourse = async (req, res) => {
 };
 exports.relatedCoureses = async (req, res) => {
   console.log(req.params);
-
-  let course = await corsesModel.findOne({ href: req.params.href });
-
-  if (!course) {
-    return res.json({ mess: "این دوره رو نداریم" });
-
-    const deletUser = await corsesModel.findByIdAndDelete({
-      _id: req.params.id,
-    });
-
+ 
     let course = await corsesModel.findByIdAndDelete(req.params.id);
 
     if (!course) {
@@ -183,7 +174,7 @@ exports.relatedCoureses = async (req, res) => {
     }
 
     return res.json(course);
-  }
+  
 };
 exports.removeCourse = async (req, res) => {
   let course = await corsesModel.findByIdAndDelete(req.params.id);
