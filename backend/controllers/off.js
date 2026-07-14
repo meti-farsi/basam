@@ -30,6 +30,32 @@ exports.setAllcourse = async (req, res) => {
     res.status(201).json({ mess: "حله" })
 }
 exports.getOne = async (req, res) => {
+    const {code} = req.params
+    const {course} = req.body
+   
+    if(!isValidObjectId(course)){
+        return  res.status(404).json({
+            mess : 'coursId not valid !!'
+        })
+    }
+
+    const Findoff = await offModel.findOne({code , course})
+    
+    if(!Findoff){
+      return  res.status(404).json({
+            mess : 'off not found !!'
+        })
+    }else if(Findoff.uses === Findoff.max){
+        return res.status(404).json({
+            mess : 'off is not available !!'
+        })
+    }else{
+        await offModel.findOneAndUpdate({code , course},{
+            uses : Findoff.uses + 1
+        })
+    }
+
+    res.status(201).json("Off is valid")
 
 
 }
