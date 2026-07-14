@@ -8,6 +8,7 @@ const courseRouter = require('./routes/corses')
 const commentRouter = require('./routes/comment')
 const bodyParser = require("body-parser");
 const newsletterRouter = require('./routes/newsletter')
+const searchRouter = require('./routes/search')
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use("/category",categoryRoter)
 app.use("/courses",courseRouter)
 app.use("/comments",commentRouter)
 app.use("/newsletters",newsletterRouter)
+app.use("/search",searchRouter)
 
 module.exports = app;
