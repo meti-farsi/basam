@@ -4,7 +4,8 @@ const router = express.Router();
 const authMiddlware = require("../middlewares/auth");
 const isAminMiddlware = require("../middlewares/isAdmin");
 
-router.route("/").post(authMiddlware, commentController.create);
+router.route("/").post(authMiddlware, commentController.create)
+.get(authMiddlware, isAminMiddlware, commentController.getAll);
 router.route("/:id").delete(authMiddlware, commentController.remove);
 router
   .route("/:id/accept")

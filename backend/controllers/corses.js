@@ -14,10 +14,10 @@ exports.create = async (req, res) => {
     price,
     support,
     catgoryID,
+    score,
     discount,
   } = req.body;
 
-  console.log(req.user);
 
   const course = await corsesModel.create({
     name,
@@ -30,6 +30,7 @@ exports.create = async (req, res) => {
     catgoryID,
     creator: req.user._id,
     discount,
+    score,
   });
 
   const mainCourse = await corsesModel
@@ -141,10 +142,9 @@ exports.getOneCourse = async (req, res) => {
 
   let allComments = [];
 
-  comments.forEach(comment => {
+   comments.forEach(comment => {
    comments.forEach(answerComment =>{
-    if(String(comment._id )=== String(answerComment.mainCommentID)){
-      
+    if(String(comment._id )=== String(answerComment.mainCommentID)){ 
       allComments.push({
         ...comment,
         course : comment.course.name,
@@ -194,3 +194,18 @@ exports.removeCourse = async (req, res) => {
 
   return res.json(course);
 };
+
+exports.populateCourse = async (req , res)=>{
+  const course = await corsesModel.find({score : {$gte : 4}}).populate("catgoryID","title").populate("creator","name").lean();
+  if(!course){
+    return res.json([])
+  }
+  res.status(201).json(course)
+}
+exports.PresaleCourse = async (req , res)=>{
+  const course = await corsesModel.find({status : "Presale"}).populate("catgoryID","title").populate("creator","name").lean();
+  if(!course){
+    return res.json([])
+  }
+  res.status(201).json(course)
+}

@@ -16,7 +16,8 @@ router
     isAminMiddlware,
     courseController.create,
   );
-
+router.route("/populate").get(authMiddlware,courseController.populateCourse);
+router.route("/Presale").get(authMiddlware,courseController.PresaleCourse);
 router.route("/:href").get(authMiddlware,isAminMiddlware,courseController.getOneCourse);
 
   router
@@ -39,5 +40,7 @@ router
 router.route("/:id/register").post(authMiddlware, courseController.register);
 
 router.route("/:id").delete(courseController.removeCourse);
+
+
 
 module.exports = router;

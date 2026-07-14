@@ -20,6 +20,7 @@ const schema = mongoose.Schema(
     },
     status: {
       type: String,
+      enum: ["progress","Presale" ],
       required: true,
     },
     price: {
@@ -43,6 +44,10 @@ const schema = mongoose.Schema(
       required: true,
       type: Number,
     },
+    score : {
+      type : Number,
+      default : 5
+    }
   },
   { Timestamps: true }
 );
