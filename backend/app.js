@@ -6,7 +6,6 @@ const users = require('./routes/user')
 const categoryRoter = require('./routes/category')
 const courseRouter = require('./routes/corses')
 const commentRouter = require('./routes/comment')
-const contactRouter = require('./routes/contact')
 const bodyParser = require("body-parser");
 const newsletterRouter = require('./routes/newsletter')
 
@@ -22,6 +21,5 @@ app.use("/category",categoryRoter)
 app.use("/courses",courseRouter)
 app.use("/comments",commentRouter)
 app.use("/newsletters",newsletterRouter)
-app.use("/contacts",contactRouter)
 
 module.exports = app;
