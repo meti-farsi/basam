@@ -26,7 +26,6 @@ exports.create = async (req, res) => {
 exports.remove = async (req, res) => {
   let commentID = req.params.id;
 
-  console.log(commentID);
 
   let comm = await commentModel.findByIdAndDelete(commentID);
 

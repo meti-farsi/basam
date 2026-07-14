@@ -9,6 +9,7 @@ const commentRouter = require('./routes/comment')
 const bodyParser = require("body-parser");
 const newsletterRouter = require('./routes/newsletter')
 const searchRouter = require('./routes/search')
+const notificationRouter = require('./routes/notification')
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use("/courses",courseRouter)
 app.use("/comments",commentRouter)
 app.use("/newsletters",newsletterRouter)
 app.use("/search",searchRouter)
+app.use("/notification",notificationRouter)
 
 module.exports = app;
