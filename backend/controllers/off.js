@@ -1,0 +1,50 @@
+const offModel = require("../models/off");
+const courseModel = require("../models/course");
+const { isValidObjectId } = require("mongoose");
+
+
+exports.create = async (req, res) => {
+
+    let { code, max, course, percent } = req.body
+
+    let newoff = await offModel.create({ code, max, course, percent, createor: req.user._id, uses: 0 })
+
+    res.status(201).json(newoff)
+
+}
+
+exports.getAll = async (req, res) => {
+    let allcantact = await contactModel.find({})
+    res.status(201).json(allcantact)
+
+}
+
+
+exports.setAllcourse = async (req, res) => {
+
+    discount = req.body
+
+
+    let setall = await courseModel.updateMany({}, { discount: req.body.discount })
+
+    res.status(201).json({ mess: "حله" })
+}
+exports.getOne = async (req, res) => {
+
+
+}
+
+exports.remove = async (req, res) => {
+
+    let removeConatct = await contactModel.findByIdAndDelete(req.params.id)
+    console.log(req.params.id);
+
+    if (!removeConatct) {
+        return res.status(201).json({ mess: "کامنت نیست" })
+
+    }
+
+
+    return res.status(201).json(removeConatct)
+
+}
