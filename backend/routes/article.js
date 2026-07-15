@@ -1,9 +1,9 @@
 const express = require("express");
-const authMiddleware = require("./");
-const isAdminMiddleware = require("./../../middlewares/isAdmin");
-const articlesController = require("./../../controllers/v1/article");
-const multer = require("multer");
-const multerStorage = require("./../../utils/uploader");
+const authMiddleware = require("../middlewares/auth");
+const isAdminMiddleware = require("../middlewares/isAdmin");
+const articlesController = require("../controllers/article");
+// const multer = require("multer");
+// const multerStorage = require("./../../utils/uploader");
 
 const router = express.Router();
 
@@ -13,7 +13,6 @@ router
   .post(
     authMiddleware,
     isAdminMiddleware,
-    multer({ storage: multerStorage, limits: { fileSize: 100000000 } }),
     articlesController.create
   );
 
@@ -28,7 +27,6 @@ router
   .post(
     authMiddleware,
     isAdminMiddleware,
-    multer({ storage: multerStorage, limits: { fileSize: 100000000 } }),
     articlesController.saveDraft
   );
 
