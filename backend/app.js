@@ -12,6 +12,7 @@ const searchRouter = require('./routes/search')
 const offRouter = require('./routes/off') 
 const orderRouter = require('./routes/order') 
 const notificationRouter = require('./routes/notification')
+const ticketRouter = require('./routes/ticket')
 
 const app = express();
 
@@ -29,5 +30,6 @@ app.use("/search",searchRouter)
 app.use("/offs",offRouter)
 app.use("/notification",notificationRouter)
 app.use("/orders",orderRouter)
+app.use("/tickets",ticketRouter)
 
 module.exports = app;
