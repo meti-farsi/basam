@@ -15,7 +15,11 @@ router
     authMiddlware,
     isAminMiddlware,
     courseController.create,
-  );
+  ).get(authMiddlware,
+    isAminMiddlware,
+    courseController.getAll)
+
+
 router.route("/populate").get(authMiddlware,courseController.populateCourse);
 router.route("/Presale").get(authMiddlware,courseController.PresaleCourse);
 router.route("/:href").get(authMiddlware,isAminMiddlware,courseController.getOneCourse);

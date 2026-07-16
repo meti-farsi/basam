@@ -41,6 +41,43 @@ exports.create = async (req, res) => {
     mainCourse,
   });
 };
+
+exports.getAll = async (req, res) => {
+
+  const courses = await corsesModel.find({})
+  .populate("catgoryID")
+  .populate("creator")
+  .lean()
+  .sort({_id : -1})
+
+  const register = await CourseUserModel.find({}).lean()
+  const comments = await commentModel.find({}).lean()
+
+  const allCourses = []
+  courses.forEach(course =>{
+    let courseTotalScore = 5;
+    const courseRegister = register.filter(register =>{
+     return register.course.toString() === course._id.toString()
+    })
+    const courseComments = comments.filter(comment =>{
+      courseTotalScore += Number(comment.score)
+      return comment.course.toString === course._id.toString
+    })
+
+    allCourses.push({
+      ...course ,
+      catgoryID : course.catgoryID.title ,
+      creator : course.creator.name ,
+      registers : courseRegister.length,
+      courseAverageScore : Math.floor(courseTotalScore / courseComments.length)
+    })
+  })
+
+  res.status(200).json(allCourses)
+}
+
+
+
 exports.getAllSession = async (req, res) => {
   const mainCourse = await corsesModel
     .find()

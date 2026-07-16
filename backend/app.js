@@ -13,6 +13,7 @@ const offRouter = require('./routes/off')
 const orderRouter = require('./routes/order') 
 const notificationRouter = require('./routes/notification')
 const ticketRouter = require('./routes/ticket')
+const menuRouter = require('./routes/menu')
 
 const app = express();
 
@@ -31,5 +32,6 @@ app.use("/offs",offRouter)
 app.use("/notification",notificationRouter)
 app.use("/orders",orderRouter)
 app.use("/tickets",ticketRouter)
+app.use("/menus",menuRouter)
 
 module.exports = app;
