@@ -60,16 +60,19 @@ exports.getAll = async (req, res) => {
      return register.course.toString() === course._id.toString()
     })
     const courseComments = comments.filter(comment =>{
-      courseTotalScore += Number(comment.score)
-      return comment.course.toString === course._id.toString
+      return comment.course.toString() === course._id.toString()
+    })
+
+    courseComments.forEach(comment=>{
+      return   courseTotalScore += Number(comment.score)
     })
 
     allCourses.push({
-      ...course ,
+      ...course , 
       catgoryID : course.catgoryID.title ,
       creator : course.creator.name ,
       registers : courseRegister.length,
-      courseAverageScore : Math.floor(courseTotalScore / courseComments.length)
+      courseAverageScore : Math.floor(courseTotalScore / courseComments.length+1)
     })
   })
 
